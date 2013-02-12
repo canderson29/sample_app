@@ -1,12 +1,51 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Ruby on Rails Tutorial Sample App | <%= yield(:title) %></title>
-    <%= stylesheet_link_tag    "application", :media => "all" %>
+    <title><%= full_title(yield(:title)) %></title>
+    <%= stylesheet_link_tag    "application", media: "all" %>
     <%= javascript_include_tag "application" %>
     <%= csrf_meta_tags %>
+    <%= render 'layouts/shim' %>    
   </head>
   <body>
-    <%= yield %>
+    <%= render 'layouts/header' %>
+    <div class="container">
+      <%= yield %>
+      <%= render 'layouts/footer' %>
+    </div>
   </body>
 </html>
+Explain <%= render 'layouts/shim' %> which is a partial file (small, inline, reusable template) that lives in app/view/layouts/_shim.html.erb. The underscore serves to show it’s a partial and helps visualize it
+Code for app/view/layouts/_shim.html.erb
+<!--[if lt IE 9]>
+<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+And for app/views/layouts/_header.html.erb
+<header class="navbar navbar-fixed-top navbar-inverse">
+  <div class="navbar-inner">
+    <div class="container">
+      <%= link_to "sample app", '#', id: "logo" %>
+      <nav>
+        <ul class="nav pull-right">
+          <li><%= link_to "Home",    root_path %></li>
+          <li><%= link_to "Help",    help_path %></li>
+          <li><%= link_to "Sign in", '#' %></li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</header>
+And for app/views/layouts/_footer.html.erb
+<footer class="footer">
+  <small>
+    <a href="http://railstutorial.org/">Rails Tutorial</a>
+    by Michael Hartl
+  </small>
+  <nav>
+    <ul>
+      <li><%= link_to "About",   about_path %></li>
+      <li><%= link_to "Contact", contact_path %></li>
+      <li><a href="http://news.railstutorial.org/">News</a></li>
+    </ul>
+  </nav>
+</footer>
