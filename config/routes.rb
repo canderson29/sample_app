@@ -9,7 +9,7 @@ match '/help',    to: 'static_pages#help'
 match '/about',   to: 'static_pages#about'
 match '/contact', to: 'static_pages#contact'
 match '/about', to: 'static_pages#about'
-match '/signup', to: 'user#new'
+match '/signup', to: 'users#new'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
